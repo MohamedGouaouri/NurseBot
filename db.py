@@ -4,13 +4,13 @@ from models import Base
 
 
 def init_db():
-    engine = create_engine('sqlite:////./nursebot.db')
+    engine = create_engine('sqlite:////app/nursebot.db')
     Base.metadata.create_all(engine)
     return engine
 
 
 def get_engine():
-    engine = create_engine('sqlite:////./nursebot.db')
+    engine = create_engine('sqlite:////app/nursebot.db')
     return engine
 
 
