@@ -45,7 +45,7 @@ async def _help(ctx):
     embed.add_field(name="$advice", value="Get an advice", inline=False)
     embed.add_field(
         name="$clear", value="Clear < amount > of messages.", inline=False)
-
+    embed.add_field(name="$joke", value="Get a funny joke", inline=False)
     await ctx.send(embed=embed)
 
 
@@ -123,4 +123,12 @@ async def advice(ctx):
     r = requests.get("https://api.adviceslip.com/advice")
     advice = json.loads(r.content)['slip']['advice']
     await ctx.send("_"+advice+"_")
+
+
+@client.command()
+async def joke(ctx):
+    r = requests.get("https://icanhazdadjoke.com/",
+                     headers={"Accept": "application/json"})
+    joke = r.json()['joke']
+    await ctx.send(f"_{joke}_")
 client.run(token)
