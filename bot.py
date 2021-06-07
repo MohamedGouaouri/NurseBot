@@ -127,8 +127,9 @@ async def advice(ctx):
 
 @client.command()
 async def joke(ctx):
-    r = requests.get("https://icanhazdadjoke.com/",
-                     headers={"Accept": "application/json"})
-    joke = r.json()['joke']
-    await ctx.send(f"_{joke}_")
+    r = requests.get(
+        "https://official-joke-api.appspot.com/jokes/programming/random")
+    setup = r.json()['setup']
+    punchline = r.json()['punchline']
+    await ctx.send(f"{setup} \n _{punchline}_")
 client.run(token)
