@@ -129,7 +129,7 @@ async def advice(ctx):
 async def joke(ctx):
     r = requests.get(
         "https://official-joke-api.appspot.com/jokes/programming/random")
-    setup = r.json()['setup']
-    punchline = r.json()['punchline']
-    await ctx.send(f"{setup} \n _{punchline}_")
+    setup = r.json()[0]['setup']
+    punchline = r.json()[0]['punchline']
+    await ctx.send(f"{setup}: \n _{punchline}_")
 client.run(token)
