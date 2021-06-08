@@ -137,19 +137,19 @@ async def joke(ctx):
 @client.command()
 async def angry(ctx):
     file = discord.File("reactions/angry.png")
-    await ctx.send(f"{ctx.message.author} is angry", file=file)
+    await ctx.send(f"{ctx.message.author.name} is angry", file=file)
 
 
 @client.command()
 async def happy(ctx):
 
     file = discord.File("reactions/smile.png")
-    await ctx.send(f"{ctx.message.author} is happy", file=file)
+    await ctx.send(f"{ctx.message.author.name} is happy", file=file)
 
 
 @client.command()
 async def sad(ctx):
     file = discord.File("reactions/cry.png")
-    await ctx.send(f"{ctx.message.author} is sad", file=file)
+    await ctx.send(f"{ctx.message.author.name} is sad", file=file)
 
 client.run(token)
