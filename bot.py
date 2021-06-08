@@ -149,7 +149,7 @@ async def happy(ctx):
 
 @client.command()
 async def sad(ctx):
-    file = discord.File("reactions/sad.png")
+    file = discord.File("reactions/cry.png")
     await ctx.send(f"{ctx.message.author} is sad", file=file)
 
 client.run(token)
