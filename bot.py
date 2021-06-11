@@ -139,7 +139,7 @@ async def _5bich(ctx):
     jokes = ["cha3lal said: il faut doubler l'effort mala f la veille de l'examen",
              "Examen reseau ra7 ykoun fih configuration VPN I think",
              "MCSI li maderch MCT bien ghi makan lah y3awel",
-             "ARCHI normalement sahla"
+             "ARCHI normalement sahla",
              "bon 5bich",
              "Dehak 9al: _l'examen ne sera pas facile_, donc il faut installer MySQL dans vos tete avant l'examen",
              "SYS ze3ma ykoun sahel",
