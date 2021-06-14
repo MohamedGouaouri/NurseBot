@@ -188,6 +188,6 @@ async def countdown(ctx):
     if days == 0 and hours == 0 and minutes <= 10:
         await ctx.send("less thand 10 minutes left go go go !!!")
 
-    await ctx.send(f"{days} days, {hours} hours {minutes} minutes good luck")
+    await ctx.send(f"{days} days, {hours} hours {minutes} minutes left good luck")
 
 client.run(token)
