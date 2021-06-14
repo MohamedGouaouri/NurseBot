@@ -139,10 +139,10 @@ async def _5bich(ctx):
     jokes = ["cha3lal said: il faut doubler l'effort mala f la veille de l'examen",
              "Examen reseau ra7 ykoun fih configuration VPN I think",
              "MCSI li maderch MCT bien ghi makan lah y3awel",
-             "ARCHI normalement sahla",
+             "ARCHI normalement sahla nchalah",
              "bon 5bich",
              "Dehak 9al: _l'examen ne sera pas facile_, donc il faut installer MySQL dans vos tete avant l'examen",
-             "SYS ze3ma ykoun sahel",
+             "SYS ze3ma ykoun sahel ?",
              ]
     await ctx.send(random.choice(jokes))
 
@@ -164,5 +164,30 @@ async def happy(ctx):
 async def sad(ctx):
     file = discord.File("reactions/cry.png")
     await ctx.send(f"{ctx.message.author.name} is sad", file=file)
+
+
+def days_hours_minutes(td):
+    return td.days, td.seconds//3600, (td.seconds//60) % 60
+
+
+@client.command()
+async def countdown(ctx):
+    # coutndown to our exam
+    exam_date = datetime.datetime(2021, 6, 21, 8, 0)
+    current_date = datetime.datetime.utcnow()
+    left = exam_date - current_date
+    (days, hours, minutes) = days_hours_minutes(left)
+    if days == 0:
+        await ctx.send(f"{hours} hours and {minutes} minutes left good luck")
+        return
+
+    if days == 0 and hours == 0:
+        await ctx.send(f"{minutes} left")
+        return
+
+    if days == 0 and hours == 0 and minutes <= 10:
+        await ctx.send("less thand 10 minutes left go go go !!!")
+
+    await ctx.send(f"{days} days, {hours} hours {minutes} minutes good luck")
 
 client.run(token)
