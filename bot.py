@@ -18,7 +18,7 @@ client.remove_command('help')
 @client.event
 async def on_ready():
     daily.start()
-    work.start()
+    # work.start()
     print('We have logged in as {0.user}'.format(client))
 
 
