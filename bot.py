@@ -5,7 +5,7 @@ import requests
 import json
 import discord
 import os
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord.utils import get
 from db import db_session, get_engine
 from models import Poll, Task
@@ -17,6 +17,8 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
+    daily.start()
+    work.start()
     print('We have logged in as {0.user}'.format(client))
 
 
@@ -103,8 +105,8 @@ async def task_add(ctx, *, task):
     await ctx.channel.send(f"{ctx.message.author} added a new task **{task}**")
 
 
-@client.command()
-async def tasks(ctx):
+@client.command(aliases=["tasks"])
+async def _tasks(ctx):
     embed = discord.Embed(title="Your tasks",
                           description="I\'m nurseBot :wink: Those are your tasks",
                           color=discord.Color.blue())
@@ -189,5 +191,17 @@ async def countdown(ctx):
         await ctx.send("less thand 10 minutes left go go go !!!")
 
     await ctx.send(f"{days} days, {hours} hours {minutes} minutes left good luck")
+
+
+@tasks.loop(hours=1)
+async def work():
+    channel = client.get_channel(838727477437399040)
+    await channel.send("!work")
+
+
+@tasks.loop(hours=24)
+async def daily():
+    channel = client.get_channel(838727477437399040)
+    await channel.send("!daily")
 
 client.run(token)
