@@ -175,7 +175,7 @@ def days_hours_minutes(td):
 @client.command()
 async def countdown(ctx):
     # coutndown to our exam
-    exam_date = datetime.datetime(2021, 6, 21, 8, 0)
+    exam_date = datetime.datetime(2021, 6, 20, 8, 0)
     current_date = datetime.datetime.utcnow()
     left = exam_date - current_date
     (days, hours, minutes) = days_hours_minutes(left)
