@@ -179,7 +179,7 @@ async def countdown(ctx):
     i = 0
     while not found:
         exam_date = datetime.datetime(
-            2021, 6, calendar[i]['date'], calendar[i]['hour'], calendar['minute'])
+            2021, 6, calendar[i]['date'], calendar[i]['hour'], calendar[i]['minute'])
         current_date = datetime.datetime.utcnow()
         left = exam_date - current_date
         (days, hours, minutes) = days_hours_minutes(left)
