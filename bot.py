@@ -5,7 +5,7 @@ import requests
 import json
 import discord
 import os
-from discord.ext import commands, tasks
+from discord.ext import commands
 from discord.utils import get
 from db import db_session, get_engine
 from models import Poll, Task
@@ -17,8 +17,6 @@ client.remove_command('help')
 
 @client.event
 async def on_ready():
-    daily.start()
-    # work.start()
     print('We have logged in as {0.user}'.format(client))
 
 
@@ -175,33 +173,33 @@ def days_hours_minutes(td):
 @client.command()
 async def countdown(ctx):
     # coutndown to our exam
-    exam_date = datetime.datetime(2021, 6, 20, 8, 0)
-    current_date = datetime.datetime.utcnow()
-    left = exam_date - current_date
-    (days, hours, minutes) = days_hours_minutes(left)
-    if days == 0:
-        await ctx.send(f"{hours} hours and {minutes} minutes left good luck")
+    with open("exams.json", "r") as f:
+        calendar = json.load(f)
+    found = False
+    i = 0
+    while not found:
+        exam_date = datetime.datetime(
+            2021, 6, calendar[i]['date'], calendar[i]['hour'], calendar['minute'])
+        current_date = datetime.datetime.utcnow()
+        left = exam_date - current_date
+        (days, hours, minutes) = days_hours_minutes(left)
+        if days < 0 or hours < 0 or minutes < 0:
+            i += 1
+        else:
+            found = True
+    if not found:
+        await ctx.send(f"Yaaay exams are over")
+        return
+    exam_of = calendar[i]['name']
+    if days == 0 and hours != 0 and minutes != 0:
+        await ctx.send(f"{hours} hours and {minutes} minutes left for {exam_of} exam ... good luck")
         return
 
-    if days == 0 and hours == 0:
-        await ctx.send(f"{minutes} left")
+    if days == 0 and hours == 0 and minutes != 0:
+        await ctx.send(f"{minutes} for {exam_of} exam ... left")
         return
 
-    if days == 0 and hours == 0 and minutes <= 10:
-        await ctx.send("less thand 10 minutes left go go go !!!")
+    await ctx.send(f"{days} days, {hours} hours {minutes} minutes left fo for {exam_of} exam ... good luck")
 
-    await ctx.send(f"{days} days, {hours} hours {minutes} minutes left good luck")
-
-
-@tasks.loop(hours=1)
-async def work():
-    channel = client.get_channel(838727477437399040)
-    await channel.send("!work")
-
-
-@tasks.loop(hours=24)
-async def daily():
-    channel = client.get_channel(838727477437399040)
-    await channel.send("!daily")
 
 client.run(token)
