@@ -138,8 +138,8 @@ async def joke(ctx):
 async def _5bich(ctx):
     jokes = [
              "MCSI li maderch MCT bien ghi makan lah y3awel",
-             "L Allia 9alet le MCT est la partie la plus défficle fi MERISE :panik:",
-             "L Allia 9alet kayna une solution unique fi MCT :panik:",
+             "L Allia 9alet le MCT est la partie la plus défficle fi MERISE",
+             "L Allia 9alet kayna une solution unique fi MCT",
              "bon 5bich",
              ]
     await ctx.send(random.choice(jokes))
