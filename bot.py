@@ -137,11 +137,11 @@ async def joke(ctx):
 @client.command(aliases=["5bich"])
 async def _5bich(ctx):
     jokes = [
-             "MCSI li maderch MCT bien ghi makan lah y3awel",
-             "L Allia 9alet le MCT est la partie la plus défficle fi MERISE",
-             "L Allia 9alet kayna une solution unique fi MCT",
-             "bon 5bich",
-             ]
+        "MCSI li maderch MCT bien ghi makan lah y3awel",
+        "L Allia 9alet le MCT est la partie la plus défficle fi MERISE",
+        "L Allia 9alet kayna une solution unique fi MCT",
+        "bon 5bich",
+    ]
     await ctx.send(random.choice(jokes))
 
 
@@ -175,7 +175,7 @@ async def countdown(ctx):
         calendar = json.load(f)
     found = False
     i = 0
-    while not found:
+    while not found and i < 5:
         exam_date = datetime.datetime(
             2021, 6, calendar[i]['date'], calendar[i]['hour'], calendar[i]['minute'])
         current_date = datetime.datetime.utcnow()
