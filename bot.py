@@ -194,7 +194,7 @@ async def countdown(ctx):
         return
 
     if days == 0 and hours == 0 and minutes != 0:
-        await ctx.send(f"{minutes} for {exam_of} exam ... left")
+        await ctx.send(f"{minutes} minutes for {exam_of} exam ... left")
         return
 
     await ctx.send(f"{days} days, {hours} hours {minutes} minutes left fo for {exam_of} exam ... good luck")
