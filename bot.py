@@ -175,7 +175,7 @@ async def countdown(ctx):
         calendar = json.load(f)
     found = False
     i = 0
-    while not found and i < 5:
+    while not found and i < 6:
         exam_date = datetime.datetime(
             2021, 6, calendar[i]['date'], calendar[i]['hour'], calendar[i]['minute'])
         current_date = datetime.datetime.utcnow()
