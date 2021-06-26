@@ -164,40 +164,4 @@ async def sad(ctx):
     await ctx.send(f"{ctx.message.author.name} is sad", file=file)
 
 
-def days_hours_minutes(td):
-    return td.days, td.seconds//3600, (td.seconds//60) % 60
-
-
-@client.command()
-async def countdown(ctx):
-    # coutndown to our exam
-    with open("exams.json", "r") as f:
-        calendar = json.load(f)
-    found = False
-    i = 0
-    while not found and i < 6:
-        exam_date = datetime.datetime(
-            2021, 6, calendar[i]['date'], calendar[i]['hour'], calendar[i]['minute'])
-        current_date = datetime.datetime.utcnow()
-        left = exam_date - current_date
-        (days, hours, minutes) = days_hours_minutes(left)
-        if days < 0 or hours < 0 or minutes < 0:
-            i += 1
-        else:
-            found = True
-    if not found:
-        await ctx.send(f"Yaaay exams are over")
-        return
-    exam_of = calendar[i]['name']
-    if days == 0 and hours != 0 and minutes != 0:
-        await ctx.send(f"{hours} hours and {minutes} minutes left for {exam_of} exam ... good luck")
-        return
-
-    if days == 0 and hours == 0 and minutes != 0:
-        await ctx.send(f"{minutes} minutes for {exam_of} exam ... left")
-        return
-
-    await ctx.send(f"{days} days, {hours} hours {minutes} minutes left fo for {exam_of} exam ... good luck")
-
-
 client.run(token)
